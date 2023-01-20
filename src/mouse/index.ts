@@ -1,5 +1,5 @@
-import { mouseCommands } from './helpers.js'
+import { mouseCommands, mouseDragToPoint } from './helpers.js'
 import mouseMove from './mouse.js'
 
-export { mouseCommands }
+export { mouseCommands, mouseDragToPoint }
 export default mouseMove;
