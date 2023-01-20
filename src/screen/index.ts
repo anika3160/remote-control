@@ -1,6 +1,9 @@
-import { maxHeight, maxWidth } from "./helpers.js";
+import { maxHeight, maxWidth, commandPrintScreen } from "./helpers.js";
+import getScreenshot from './screenshot.js';
 
 export {
     maxHeight,
-    maxWidth
+    maxWidth,
+    commandPrintScreen,
+    getScreenshot
 }

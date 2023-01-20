@@ -1,8 +1,10 @@
 import { WebSocketServer } from 'ws'
+import fs from 'node:fs/promises'
 
 import { httpServer } from './src/http_server/index.js'
 import mouseMove, { mouseCommands } from './src/mouse/index.js'
 import { drawFiguresCommands, drawCircle, drawRectangle } from './src/draw/index.js'
+import { commandPrintScreen, getScreenshot } from './src/screen/index.js'
 
 const HTTP_PORT = 8181
 const WS_PORT = 8080
@@ -19,7 +21,6 @@ wsServer.on('connection', async (ws: any, request: any, client: any) => {
     console.log(`Message from user: ${stringData}`)
     const arrayOfData = stringData.split(' ')
     const isMouseCommand = Object.values(mouseCommands).includes(arrayOfData[0])
-    // const isDrawFigureCommand = Object.values(drawFiguresCommands).includes(arrayOfData[0])
     if (isMouseCommand) {
       ws.send(await mouseMove(stringData))
     }
@@ -41,9 +42,19 @@ wsServer.on('connection', async (ws: any, request: any, client: any) => {
         ws.send(`${data} done!`)
         break
       }
+      case commandPrintScreen: {
+        const screenshotPath = await getScreenshot()
+        const image = await fs.readFile(screenshotPath, { encoding: 'base64' })
+        ws.send(`${data} ${image}`)
+        break
+      }
       default: {
         break
       }
     }
+  })
+
+  ws.on('close', () => {
+    console.log('Connection closed.')
   })
 })
