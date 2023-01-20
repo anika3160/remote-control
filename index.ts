@@ -4,6 +4,7 @@ import { httpServer } from './src/http_server/index.js'
 import mouseMove, { mouseCommands } from './src/mouse/index.js'
 import { drawFiguresCommands } from './src/draw/index.js'
 import drawRectangle from './src/draw/rectangle.js'
+import drawCircle from './src/draw/circle.js'
 
 const HTTP_PORT = 8181
 const WS_PORT = 8080
@@ -34,6 +35,11 @@ wsServer.on('connection', async (ws: any, request: any, client: any) => {
       }
       case drawFiguresCommands.rectangle: {
         await drawRectangle(Number(arrayOfData[1]), Number(arrayOfData[2]))
+        ws.send(`${data} done!`)
+        break
+      }
+      case drawFiguresCommands.circle: {
+        await drawCircle(Number(arrayOfData[1]))
         ws.send(`${data} done!`)
         break
       }
