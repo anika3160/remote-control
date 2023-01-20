@@ -2,9 +2,7 @@ import { WebSocketServer } from 'ws'
 
 import { httpServer } from './src/http_server/index.js'
 import mouseMove, { mouseCommands } from './src/mouse/index.js'
-import { drawFiguresCommands } from './src/draw/index.js'
-import drawRectangle from './src/draw/rectangle.js'
-import drawCircle from './src/draw/circle.js'
+import { drawFiguresCommands, drawCircle, drawRectangle } from './src/draw/index.js'
 
 const HTTP_PORT = 8181
 const WS_PORT = 8080
