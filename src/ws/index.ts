@@ -1,6 +1,4 @@
 import { WebSocketServer } from 'ws'
-import fs from 'node:fs/promises'
-
 import mouseMove, { mouseCommands } from '../mouse/index.js'
 import { drawFiguresCommands, drawCircle, drawRectangle } from '../draw/index.js'
 import { commandPrintScreen, getScreenshot } from '../screen/index.js'
@@ -38,9 +36,9 @@ wsServer.on('connection', async (ws: any, request: any, client: any) => {
         break
       }
       case commandPrintScreen: {
-        const screenshotPath = await getScreenshot()
-        const image = await fs.readFile(screenshotPath, { encoding: 'base64' })
-        ws.send(`${data} ${image}`)
+        const screenshot = await getScreenshot()
+        ws.send(`${data} ${screenshot}`)
+
         break
       }
       default: {
