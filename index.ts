@@ -1,5 +1,5 @@
 import { httpServer } from './src/http_server/index.js'
-import './src/ws/index.js'
+import './src/ws/stream.js'
 
 const HTTP_PORT = 8181
 

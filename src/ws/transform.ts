@@ -1,5 +1,5 @@
 import { Transform } from 'node:stream'
-import app from '../app/index.js';
+import app from '../app/index.js'
 
 const appStream = new Transform({
   async transform(chunk, encoding, callback) {
@@ -11,4 +11,4 @@ const appStream = new Transform({
   },
 })
 
-export default appStream;
+export default appStream
