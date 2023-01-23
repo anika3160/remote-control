@@ -15,3 +15,7 @@ wsServer.on('connection', async (ws: any, request: any, client: any) => {
     console.log('Connection closed.')
   })
 })
+
+process.on('SIGINT', () => {
+  wsServer.close()
+})
